@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { appContext } from "@/pages/_app";
 
@@ -6,7 +6,7 @@ export default function CartItem({ id, title, price, count, image }) {
 
   const context = useContext(appContext);
 
-  const {addedToCart , setAddedToCart , addedProducts , setAddedProducts , setTotalPrice} = context
+  const {addedToCart , setAddedToCart , addedProducts , setAddedProducts} = context
 
   const increaseHandler = () => {
     const updateAddedProducts = [...addedProducts];
@@ -40,17 +40,7 @@ export default function CartItem({ id, title, price, count, image }) {
     setAddedProducts(updateAddedProducts);
   };
 
-  useEffect(() => {
-    let updateTotalPrice = 0;
-    if (!addedProducts.length) {
-      setTotalPrice(updateTotalPrice);
-      return;
-    }
-    addedProducts.forEach((product) => {
-      updateTotalPrice += product.total;
-    });
-    setTotalPrice(updateTotalPrice);
-  });
+
 
   return (
     <>

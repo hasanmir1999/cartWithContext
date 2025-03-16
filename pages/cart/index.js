@@ -1,12 +1,25 @@
 import CartItem from "@/components/cartItem/CartItem";
 
 import { appContext } from "../_app";
-import { useContext } from "react";
+import { useContext , useEffect } from "react";
 
 export default function Cart() {
 
   const context = useContext(appContext)
-  const { addedToCart , addedProducts , totalPrice} = context
+  const { addedToCart , addedProducts , totalPrice ,setTotalPrice} = context
+
+
+  useEffect(() => {
+    let updateTotalPrice = 0;
+    if (!addedProducts.length) {
+      setTotalPrice(updateTotalPrice);
+      return;
+    }
+    addedProducts.forEach((product) => {
+      updateTotalPrice += product.total;
+    });
+    setTotalPrice(updateTotalPrice);
+  });
 
   return (
     <>
